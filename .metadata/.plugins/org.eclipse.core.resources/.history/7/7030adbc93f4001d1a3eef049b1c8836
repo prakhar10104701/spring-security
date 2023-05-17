@@ -1,0 +1,44 @@
+package com.spring.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.spring.security.models.User;
+import com.spring.security.repo.UserRepository;
+
+@SpringBootApplication
+public class SpringSecurityDemoApplication implements CommandLineRunner {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcrptPasswordEncoder;
+	
+	public static void main(String[] args) {
+		SpringApplication.run(SpringSecurityDemoApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		User user = new User();
+		user.setEmail("abc@mail.com");
+		user.setUsename("prakhar");
+		user.setPassword(bcrptPasswordEncoder.encode("prakhar"));
+		user.setRole("NORMAL");
+		this.userRepository.save(user);
+		
+		
+		User user1 = new User();
+		user1.setEmail("xyz@mail.com");
+		user1.setUsename("srasti");
+		user1.setPassword(bcrptPasswordEncoder.encode("srasti"));
+		user1.setRole("ADMIN");
+		this.userRepository.save(user1);
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.spring.security.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.spring.security.models.User;
+
+@Service
+public class UserService {
+	List<User> list = new ArrayList<>();
+	
+	public UserService() {
+		list.add("abc", "abc", "abc@mail.com");
+	}
+}
